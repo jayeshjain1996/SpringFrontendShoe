@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="sp" uri="http://www.springframework.org/tags" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,9 @@
    <div class="form-group">
    <label>Enter Password</label>
    <input type="password" name="password" placeholder="Enter Password" class="form-control"/>
+   </div>
+   <div class="form-group">
+   <a  href="${pageContext.request.contextPath}/user/enterusername">Forgot Password?</a>
    </div>
    <div>
    <input type="submit" value="Login" class="btn btn-danger btn-block"/>

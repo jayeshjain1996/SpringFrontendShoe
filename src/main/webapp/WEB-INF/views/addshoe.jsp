@@ -20,7 +20,7 @@ margin:0 auto;
 <div class="container">
   <h1 style="text-decoration: underline;text-decoration: underline;color: green;text-align: center;">ADD SHOE</h1>
   <c:if test="${s==null }">
-  <sp:form class="col-lg-6 col-md-6 col-sm-12 col-xm-12 margin" modelAttribute="shoe" action="${pageContext.request.contextPath}/shoe/add" method="post">
+  <sp:form class="col-lg-6 col-md-6 col-sm-12 col-xm-12 margin" modelAttribute="shoe" action="${pageContext.request.contextPath}/shoe/add" method="post" enctype="multipart/form-data">
     <div class="form-group">
     <label>Enter Shoebrand</label>
     <sp:input path="shoebrand" placeholder="Enter Shoebrand" class="form-control"/>
@@ -28,6 +28,10 @@ margin:0 auto;
     <div class="form-group">
     <label>Enter shoemodel</label>
     <sp:input path="shoemodel" placeholder="Enter Shoemodel" class="form-control"/>
+    </div>
+    <div class="form-group">
+    <label>Select Images</label>
+    <input type="file" name="image" accept="image/*" multiple="multiple" height="250">
     </div>
     <div class="form-group">
     <label>Enter Sheosize</label>

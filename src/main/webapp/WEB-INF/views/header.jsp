@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page  isELIgnored="false"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +25,21 @@
       <li class="nav-item active">
         <a class="nav-link" href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a>
       </li>
+      <sec:authorize access="!isAuthenticated()">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/user/login">Login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/user/register">Register</a>
       </li>
+      </sec:authorize>
+      
+      <sec:authorize access="isAuthenticated() and hasAuthority('admin')">
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/shoe/add">ADD</a>
       </li>
+      </sec:authorize>
+      
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/shoe/display">Display</a>
       </li>
@@ -42,6 +49,14 @@
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/contactus">Contact Us</a>
       </li>
+      <sec:authorize access="isAuthenticated()">
+      <li class="nav-item">
+       <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/user/profile">Profile</a>
+      </li>
+      </sec:authorize>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -27,7 +27,7 @@
             <div class="product-grid">
                 <div class="product-image">
                     <a href="${pageContext.request.contextPath}/shoe/display/${shoe.shoeid}">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
+                        <img class="pic-1" style="height:250px" src='<sp:url value="/images/${shoe.shoebrand}/${shoe.shoeimage}"></sp:url>'>
                     </a>
                 </div>
                 <div class="product-content">
