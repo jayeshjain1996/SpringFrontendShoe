@@ -7,6 +7,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,4 +175,53 @@ public class ShoeController
 	  shoeService.updateShoe(s);
 	  return "redirect:/shoe/display";
   }
+  
+  @RequestMapping("/hightolow")
+  public String hightolow(ModelMap map)
+  {
+	  List<Shoe> shoes=new ArrayList<Shoe>();
+	  for (Shoe shoe :shoeService.displayHighToLow()) 
+	  {
+		List<String> im=displayImage(shoe.getShoebrand());
+		if(!im.isEmpty())
+		shoe.setShoeimage(im.get(0));
+		shoes.add(shoe);
+	  }
+	  
+	  map.addAttribute("shoes",shoes);
+	  return "displayshoes";
+  }
+  
+  @RequestMapping("/lowtohigh")
+  public String lowtohigh(ModelMap map)
+  {
+	  List<Shoe> shoes=new ArrayList<Shoe>();
+	  for (Shoe shoe : shoeService.displayLowToHigh()) 
+	  {
+	 	List<String> im=displayImage(shoe.getShoebrand());
+	 	if(!im.isEmpty())
+	 	shoe.setShoeimage(im.get(0));
+	 	shoes.add(shoe);
+	  }
+	  
+	  map.addAttribute("shoes",shoes);
+	  return "displayshoes";
+  }
+  
+  @RequestMapping("/search")
+  public String displayBySearch(@RequestParam("search") String search,ModelMap map)
+  {
+	  List<Shoe> shoes=new ArrayList<Shoe>();
+	  for (Shoe shoe : shoeService.displayBySearch(search)) 
+	  {
+	 	List<String> im=displayImage(shoe.getShoebrand());
+	 	if(!im.isEmpty())
+	 	shoe.setShoeimage(im.get(0).toString());
+	 	shoes.add(shoe);
+	  }
+	  
+	  map.addAttribute("shoes",shoes);
+	  return "displayshoes";
+  }
+    
 }

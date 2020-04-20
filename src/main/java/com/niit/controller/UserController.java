@@ -1,5 +1,6 @@
 package com.niit.controller;
 
+import java.security.Principal;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,49 @@ public class UserController
 		 return "changepassword";
 	 }
 	 
+ }
+ 
+ @RequestMapping("/profile")
+ public String profile(Principal principal,ModelMap map)
+ {
+	 String name=principal.getName();
+	 User user=userService.displayByUsername(name);
+	 map.addAttribute("user",user);
+	 return "profile";
+ }
+ 
+ @RequestMapping("/updatepassword")
+ public String updatepassword()
+ {
+	 return "updatepassword";
+ }
+ 
+ @RequestMapping("passwordcheck")
+ public String passwordcheck(@RequestParam("opass") String opass,@RequestParam("pass") String pass,@RequestParam("cpass") String cpass,Principal principal)
+ {
+	 String name=principal.getName();
+	 User user=userService.displayByUsername(name);
+	 String oldpassword=user.getPassword();
+	 opass=new BCryptPasswordEncoder().encode(opass);
+	 System.out.println(oldpassword);
+	 System.out.println(opass);
+	 if(oldpassword.equals(opass))
+	 {
+		 if(pass.equals(cpass))
+		 {
+		   pass=new BCryptPasswordEncoder().encode(pass);
+		   user.setPassword(pass);
+		   userService.updateUser(user);
+		   return "redirect:/user/login";		   
+		 }
+		 else
+		 {
+			 return "updatepassword";
+		 }
+	 }
+	 else
+	 {
+		 return "updatepassword";
+	 }
  }
 }

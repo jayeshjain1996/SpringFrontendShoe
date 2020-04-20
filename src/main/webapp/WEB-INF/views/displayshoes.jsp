@@ -15,12 +15,27 @@
 {
  margin:0 auto;
 }
+.place
+{
+ position:absolute;
+ left:1000px;
+ bottom:67px;
+}
 </style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container">
-    <h3 class="h3">shopping Demo-1 </h3>
+    <h3 class="h3" style="text-decoration: underline;color: gray;font-weight: bold;font-size:xx-large;">SHOES</h3>
+    <div class="dropdown place">
+	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Filter
+	  </button>
+	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+	    <a class="dropdown-item" href="${pageContext.request.contextPath}/shoe/hightolow">High to Low</a>
+	    <a class="dropdown-item" href="${pageContext.request.contextPath}/shoe/lowtohigh">Low to High</a>
+	  </div>
+    </div>
     <div class="row">
       <c:forEach items="${shoes}" var="shoe">
         <div class="col-md-3 col-sm-6">
@@ -29,7 +44,7 @@
                     <a href="${pageContext.request.contextPath}/shoe/display/${shoe.shoeid}">
                         <img class="pic-1" style="height:250px" src='<sp:url value="/images/${shoe.shoebrand}/${shoe.shoeimage}"></sp:url>'>
                     </a>
-                </div>
+                </div>                
                 <div class="product-content">
                     <h3 class="title"><a href="#">${shoe.shoebrand}</a></h3>
                     <div class="price">Rs. ${shoe.price}
